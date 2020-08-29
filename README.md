@@ -1,7 +1,7 @@
 flume-ng-mqtt-source
 ================
 
-> 本项目是对Apache Flume Source的扩展，支持MQTT服务器为数据源
+> 本项目是对Apache Flume Source的扩展，支持MQTT服务器为数据源，基于Flume1.6.0版本扩展
 
 > 在mosquitto服务器平台上测试完全没有问题，其他MQTT服务器平台没有测试
 
