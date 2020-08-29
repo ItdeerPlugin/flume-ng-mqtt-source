@@ -1,17 +1,7 @@
 flume-ng-mqtt-source
 ================
 
-> 本项目是对Apache Flume Source的扩展，支持MQTT服务器为数据源，基于Flume1.6.0版本扩展
-
-> 在mosquitto服务器平台上测试完全没有问题，其他MQTT服务器平台没有测试
-
-功能列表
-----------
-
- - 支持断开重连
- - 支持设置批大小
- - 支持设置用户密码
- - 性能处理尚可
+本项目是对Apache Flume Source的扩展，支持MQTT服务器为数据源，基于Flume1.6.0版本扩展
 
 编译打包
 ----------
@@ -51,7 +41,6 @@ username | 否 |   | 连接用户名 |  demo
 password | 否 |   | 连接密码 |  demo
 retryConnection | 否 | false  | 是否重连Mqtt服务器 | true
 
-
 配置示例
 --------------------
 
@@ -74,7 +63,6 @@ agent.sources.mqtt.keepAliveInterval = 100
 agent.sources.mqtt.username = demo
 agent.sources.mqtt.password = demo
 agent.sources.mqtt.retryConnection = true
-
 
 agent.channels.memory-channel.type = memory
 

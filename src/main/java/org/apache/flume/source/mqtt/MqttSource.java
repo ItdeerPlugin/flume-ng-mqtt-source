@@ -69,8 +69,8 @@ public class MqttSource extends AbstractSource
             }
             return Status.READY;
         } else {
-            log.error("The MQTT connection is disconnected and reconnected ......");
             if (retryConnection) {
+                log.error("The MQTT connection is disconnected and reconnected ......");
                 reConnect();
                 return Status.READY;
             }
@@ -164,12 +164,11 @@ public class MqttSource extends AbstractSource
 
                     @Override
                     public void deliveryComplete(IMqttDeliveryToken token) {
-
                     }
                 });
 
                 try {
-                    mqttClient.connect();
+                    mqttClient.connect(mqttConnectOptions);
                 } catch (MqttException e) {
                     log.error("Get the MQTT connection exception, exception information is : {}", e.fillInStackTrace());
                     reConnect();
@@ -178,6 +177,9 @@ public class MqttSource extends AbstractSource
         }
     }
 
+    /**
+     * 重连
+     */
     public void reConnect() {
 
         try {
@@ -186,15 +188,11 @@ public class MqttSource extends AbstractSource
             log.error("Retry Get the MQTT Thread sleep exception, exception information is : {}", e.fillInStackTrace());
         }
 
-        if (null != mqttClient) {
-            if (!mqttClient.isConnected()) {
-                if (null != mqttConnectOptions) {
-                    try {
-                        mqttClient.connect(mqttConnectOptions);
-                    } catch (MqttException e) {
-                        log.error("Retry Get the MQTT connection exception, exception information is : {}", e.fillInStackTrace());
-                    }
-                }
+        if (null != mqttClient && !mqttClient.isConnected() && null != mqttConnectOptions) {
+            try {
+                mqttClient.connect(mqttConnectOptions);
+            } catch (MqttException e) {
+                log.error("Retry Get the MQTT connection exception, exception information is : {}", e.fillInStackTrace());
             }
         } else {
             start();
